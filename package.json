@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
     "@aposin/ng-aquila": "^15.0.0",
+    "@ngrx/store": "^15.1.0",
     "i18n-iso-countries": "^6.8.0",
     "iban": "^0.0.14",
     "moment": "^2.29.1",
@@ -31,6 +32,7 @@
     "@angular-devkit/build-angular": "^15.1.1",
     "@angular/cli": "~15.1.1",
     "@angular/compiler-cli": "^15.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
@@ -38,6 +40,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "prettier": "^2.8.2",
     "typescript": "~4.9.4"
   }
 }
