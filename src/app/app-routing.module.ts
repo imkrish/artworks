@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: 'artworks',
     loadChildren: () =>
-      import('./artwork/artwork.module').then((m) => m.ArtworkModule),
+      import('./features/artwork/artwork.module').then((m) => m.ArtworkModule),
   },
   { path: '**', redirectTo: '/artworks' },
 ]

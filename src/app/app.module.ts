@@ -18,12 +18,11 @@ import { NxMessageModule } from '@aposin/ng-aquila/message'
 import { NxModalModule } from '@aposin/ng-aquila/modal'
 import { NxOverlayModule } from '@aposin/ng-aquila/overlay'
 import { NxPopoverModule } from '@aposin/ng-aquila/popover'
-import { EffectsModule } from '@ngrx/effects'
-import { StoreModule } from '@ngrx/store'
 
 import { AppRoutingModule } from './app-routing.module'
+import { AppStoreModule } from './app-store.module'
 import { AppComponent } from './app.component'
-import { ArtworkModule } from './artwork/artwork.module'
+import { ArtworkModule } from './features/artwork/artwork.module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -54,8 +53,7 @@ import { ArtworkModule } from './artwork/artwork.module'
     NxPopoverModule,
 
     // Store
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    AppStoreModule,
 
     // App
     AppRoutingModule,
@@ -64,5 +62,3 @@ import { ArtworkModule } from './artwork/artwork.module'
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-/** Copyright Allianz 2023 */
