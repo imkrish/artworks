@@ -18,11 +18,12 @@ import { NxMessageModule } from '@aposin/ng-aquila/message'
 import { NxModalModule } from '@aposin/ng-aquila/modal'
 import { NxOverlayModule } from '@aposin/ng-aquila/overlay'
 import { NxPopoverModule } from '@aposin/ng-aquila/popover'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreModule } from '@ngrx/store'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { ArtworkModule } from './artwork/artwork.module';
-import { StoreModule } from '@ngrx/store'
+import { ArtworkModule } from './artwork/artwork.module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,12 +53,13 @@ import { StoreModule } from '@ngrx/store'
     NxOverlayModule,
     NxPopoverModule,
 
+    // Store
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+
     // App
     AppRoutingModule,
-
     ArtworkModule,
-
-    StoreModule.forRoot({}, {}),
   ],
   bootstrap: [AppComponent],
 })
