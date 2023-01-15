@@ -1,39 +1,58 @@
-<div class="flex-col my-12">
-  <div class="flex justify-center">
+<div class="flex-col m-12">
+  <div class="text-center">
     <h1 class="text-2xl">ART COLLECTION</h1>
   </div>
 
-  <div class="flex justify-center my-12" [ngSwitch]="loadingStatus$ | async">
+  <div class="my-12 flex justify-center" [ngSwitch]="loadingStatus$ | async">
     <div *ngSwitchCase="[Status.Pending]">
       <nx-spinner nxSize="large"></nx-spinner>
     </div>
-    <div *ngSwitchCase="[Status.Rejected]">Rejected</div>
-    <div class="grid grid-cols-4 gap-8" *ngSwitchCase="[Status.Success]">
-      <nx-card *ngFor="let artwork of artworks$ | async">
-        <div class="flex justify-center items-center max-h-96">
-          <img
-            [src]="artwork.imgUrl"
-            [alt]="artwork.title"
-            (error)="setImagePlaceholder(artwork)"
-            class="w-auto max-h-56"
-          />
-        </div>
 
-        <nx-card-header>
-          <h3 nxHeadline="subsection-small" class="nx-margin-bottom-2m">
-            {{ artwork.title }}
-          </h3>
-        </nx-card-header>
-        <p nxHeadline="subsection-xsmall" class="nx-margin-bottom-m">
-          {{ artwork.artists }}
-        </p>
-        <p nxCopytext="normal">
-          {{ artwork.originAndYear }}
-        </p>
-        <p nxCopytext="normal">
-          {{ artwork.materials }}
-        </p>
-      </nx-card>
+    <div *ngSwitchCase="[Status.Rejected]">
+      Something went wrong please try again.
     </div>
+
+    <div class="w-full" *ngSwitchCase="[Status.Success]">
+      <div class="grid grid-cols-4 gap-8 w-full">
+        <nx-card *ngFor="let artwork of artworks$ | async">
+          <div class="flex justify-center items-center max-h-96">
+            <img
+              [src]="artwork.imgUrl"
+              [alt]="artwork.title"
+              (error)="setImagePlaceholder(artwork)"
+              class="w-auto max-h-56"
+            />
+          </div>
+
+          <nx-card-header>
+            <h3 nxHeadline="subsection-small" class="nx-margin-bottom-2m">
+              {{ artwork.title }}
+            </h3>
+          </nx-card-header>
+          <p nxHeadline="subsection-xsmall" class="nx-margin-bottom-m">
+            {{ artwork.artists }}
+          </p>
+          <p nxCopytext="normal">
+            {{ artwork.originAndYear }}
+          </p>
+          <p nxCopytext="normal">
+            {{ artwork.materials }}
+          </p>
+        </nx-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center my-12">
+    <nx-pagination
+      [nxCount]="(total$ | async) || 0"
+      [nxPage]="currentPage"
+      [nxPerPage]="(limit$ | async) || 0"
+      nxType="advanced"
+      (nxGoPrev)="prevPage()"
+      (nxGoNext)="nextPage()"
+      (nxGoPage)="goToPage($event)"
+    >
+    </nx-pagination>
   </div>
 </div>

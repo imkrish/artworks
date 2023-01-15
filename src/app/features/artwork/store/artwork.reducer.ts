@@ -11,14 +11,16 @@ import {
 export interface ArtworkState {
   imgBaseUrl: string
   artworks: ArtworkItemResponse[]
-  totalPages: number
+  total: number
+  limit: number
   loadingStatus: Status
 }
 
 const initialState: ArtworkState = {
   imgBaseUrl: '',
   artworks: [],
-  totalPages: 0,
+  total: 0,
+  limit: 0,
   loadingStatus: Status.Idle,
 }
 
@@ -34,7 +36,8 @@ export const artworkReducer = createReducer(
       ...state,
       imgBaseUrl: config.iiif_url,
       artworks: data,
-      totalPages: pagination.total_pages,
+      total: pagination.total,
+      limit: pagination.limit,
       loadingStatus: Status.Success,
     }
   }),

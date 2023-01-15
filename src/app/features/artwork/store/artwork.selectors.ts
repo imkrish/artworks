@@ -42,10 +42,12 @@ export class ArtworkSelectors {
       }
     })
   })
+
   static loadingStatus = createSelector(
     selectFeature,
     (state) => state.loadingStatus,
   )
 
-  static totalPages = createSelector(selectFeature, (state) => state.totalPages)
+  static total = createSelector(selectFeature, (state) => state.total)
+  static limit = createSelector(selectFeature, (state) => state.limit)
 }

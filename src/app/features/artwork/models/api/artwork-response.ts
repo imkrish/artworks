@@ -19,5 +19,6 @@ export interface ArtworkItemResponse {
 }
 
 interface ArtworkPaginationResponse {
-  total_pages: number
+  total: number
+  limit: number
 }
