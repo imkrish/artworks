@@ -9,12 +9,14 @@ import {
 } from './artwork.actions'
 
 export interface ArtworkState {
+  imgBaseUrl: string
   artworks: ArtworkItemResponse[]
   totalPages: number
   loadingStatus: Status
 }
 
 const initialState: ArtworkState = {
+  imgBaseUrl: '',
   artworks: [],
   totalPages: 0,
   loadingStatus: Status.Idle,
@@ -26,10 +28,13 @@ export const artworkReducer = createReducer(
     return { ...state, loadingStatus: Status.Pending }
   }),
   on(artworksLoaded, (state, { response }) => {
+    const { config, data, pagination } = response
+
     return {
       ...state,
-      artworks: response.data,
-      totalPages: response.pagination.total_pages,
+      imgBaseUrl: config.iiif_url,
+      artworks: data,
+      totalPages: pagination.total_pages,
       loadingStatus: Status.Success,
     }
   }),

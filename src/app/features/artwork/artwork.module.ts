@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { NxSpinnerModule } from '@aposin/ng-aquila/spinner'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
 
@@ -8,6 +9,7 @@ import { ArtworkListComponent } from './pages/artwork-list/artwork-list.componen
 import { ArtworkService } from './services/artwork.service'
 import { ArtworkEffects } from './store/artwork.effects'
 import { artworkReducer } from './store/artwork.reducer'
+import {NxCardModule} from "@aposin/ng-aquila/card";
 
 export const ARTWORK_FEATURE_NAME = 'artwork'
 
@@ -21,6 +23,10 @@ export const ARTWORK_FEATURE_NAME = 'artwork'
     // store
     StoreModule.forFeature(ARTWORK_FEATURE_NAME, artworkReducer),
     EffectsModule.forFeature([ArtworkEffects]),
+
+    // NX
+    NxSpinnerModule,
+    NxCardModule
   ],
 })
 export class ArtworkModule {}
