@@ -4,4 +4,6 @@ export interface Artwork {
   materials: string
   originAndYear: string
   imgUrl: string
+  styleTitles: string[]
+  dateStart: number
 }

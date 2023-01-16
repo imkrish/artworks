@@ -3,6 +3,38 @@
     <h1 class="text-2xl">ART COLLECTION</h1>
   </div>
 
+  <div class="my-12 flex justify-center">
+    <div class="w-80 mr-16">
+      <nx-formfield nxLabel="Style">
+        <nx-multi-select
+          [options]="(styleTitlesOptions$ | async) || []"
+          selectLabel="label"
+          selectValue="styleTitle"
+          [(ngModel)]="selectedFilters"
+        >
+        </nx-multi-select>
+      </nx-formfield>
+    </div>
+
+    <div class="w-80">
+      <nx-formfield nxLabel="Sort by">
+        <nx-dropdown
+          *ngIf="artworks$ | async as artworks"
+          [(ngModel)]="sortBy"
+          (selectionChange)="
+            filterAndSort(artworks, selectedFilters, $event.value)
+          "
+          [nxValueFormatter]="toLabel"
+        >
+          <nx-dropdown-item
+            *ngFor="let item of SORT_ITEMS"
+            [nxValue]="item"
+          ></nx-dropdown-item>
+        </nx-dropdown>
+      </nx-formfield>
+    </div>
+  </div>
+
   <div class="my-12 flex justify-center" [ngSwitch]="loadingStatus$ | async">
     <div *ngSwitchCase="[Status.Pending]">
       <nx-spinner nxSize="large"></nx-spinner>
@@ -14,7 +46,15 @@
 
     <div class="w-full" *ngSwitchCase="[Status.Success]">
       <div class="grid grid-cols-4 gap-8 w-full">
-        <nx-card *ngFor="let artwork of artworks$ | async">
+        <nx-card
+          *ngFor="
+            let artwork of filterAndSort(
+              (artworks$ | async) || [],
+              selectedFilters,
+              sortBy
+            )
+          "
+        >
           <div class="flex justify-center items-center max-h-96">
             <img
               [src]="artwork.imgUrl"

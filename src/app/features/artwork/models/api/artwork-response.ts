@@ -16,6 +16,7 @@ export interface ArtworkItemResponse {
   place_of_origin: string
   date_start: number
   date_end: number
+  style_titles: string[]
 }
 
 interface ArtworkPaginationResponse {

@@ -32,6 +32,7 @@ export class ArtworkSelectors {
         date_start,
         date_end,
         material_titles,
+        style_titles,
       } = artwork
       return {
         title,
@@ -39,7 +40,27 @@ export class ArtworkSelectors {
         materials: material_titles.join(', '),
         originAndYear: getOriginAndYear(place_of_origin, date_start, date_end),
         imgUrl: `${imgBaseUrl}/${artwork.image_id}/full/843,/0/default.jpg`,
+        styleTitles: style_titles,
+        dateStart: date_start
       }
+    })
+  })
+
+  static styleTitlesOptions = createSelector(selectFeature, (state) => {
+    const styleTitleCountDict = state.artworks.reduce((dict, artwork) => {
+      artwork.style_titles.forEach((styleTitle) => {
+        if (!dict[styleTitle]) {
+          dict[styleTitle] = 0
+        }
+        dict[styleTitle] += 1
+      })
+
+      return dict
+    }, {} as Record<string, number>)
+
+    return Object.keys(styleTitleCountDict).map((styleTitle) => {
+      const count = styleTitleCountDict[styleTitle]
+      return { styleTitle, count, label: `${styleTitle} (${count})` }
     })
   })
 
