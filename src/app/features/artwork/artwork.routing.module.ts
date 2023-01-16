@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { ArtworkListComponent } from './pages/artwork-list/artwork-list.component'
+import { ArtworkPageComponent } from './pages/artwork-page/artwork-page.component'
 
 const routes: Routes = [
   {
     path: '',
-    component: ArtworkListComponent,
+    component: ArtworkPageComponent,
   },
 ]
 

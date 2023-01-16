@@ -7,16 +7,15 @@ import { Status } from '../../../../shared/models/status'
 import { Artwork } from '../../models/artwork'
 import { LabelValue } from '../../models/label-value'
 import { StyleTitleOption } from '../../models/style-title-option'
-import { DEFAULT_IMAGE_URL } from '../../services/artwork.service'
 import { loadArtworks } from '../../store/artwork.actions'
 import { ArtworkSelectors } from '../../store/artwork.selectors'
 
 @Component({
-  selector: 'app-artwork-list',
-  templateUrl: './artwork-list.component.html',
+  selector: 'app-artwork-page',
+  templateUrl: './artwork-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArtworkListComponent {
+export class ArtworkPageComponent {
   SORT_ITEMS: LabelValue[] = [
     { value: 'title', label: 'Name' },
     { value: 'artists', label: 'Artist' },
@@ -24,6 +23,7 @@ export class ArtworkListComponent {
   ]
   Status = Status
 
+  // from store
   artworks$: Observable<Artwork[]>
   total$: Observable<number>
   limit$: Observable<number>
@@ -36,6 +36,7 @@ export class ArtworkListComponent {
   sortBy: LabelValue
 
   constructor(private store: Store<AppState>) {
+    // from store
     this.artworks$ = this.store.select(ArtworkSelectors.artworks)
     this.total$ = this.store.select(ArtworkSelectors.total)
     this.limit$ = this.store.select(ArtworkSelectors.limit)
@@ -54,40 +55,6 @@ export class ArtworkListComponent {
     this.store.dispatch(loadArtworks({ page: 0 }))
   }
 
-  filterAndSort(
-    artworks: Artwork[],
-    selectedFilters: string[],
-    { value }: LabelValue,
-  ) {
-    return artworks
-      .filter((artwork) => {
-        if (selectedFilters.length === 0) {
-          return true
-        }
-
-        return selectedFilters.some((value) =>
-          artwork.styleTitles.includes(value),
-        )
-      })
-      .sort((item1, item2) => {
-        // @ts-ignore
-        const [item1Value, item2Value] = [item1[value], item2[value]]
-
-        if (item1Value > item2Value) {
-          return 1
-        }
-        if (item1Value < item2Value) {
-          return -1
-        }
-
-        return 0
-      })
-  }
-
-  setImagePlaceholder(artwork: Artwork) {
-    // mutation
-    artwork.imgUrl = DEFAULT_IMAGE_URL
-  }
 
   toLabel(item: any) {
     return item.label

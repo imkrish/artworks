@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { FormsModule } from '@angular/forms'
 import { NxCardModule } from '@aposin/ng-aquila/card'
 import { NxDropdownModule } from '@aposin/ng-aquila/dropdown'
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield'
@@ -9,16 +10,16 @@ import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
 
 import { ArtworkRoutingModule } from './artwork.routing.module'
-import { ArtworkListComponent } from './pages/artwork-list/artwork-list.component'
+import { ArtworkListComponent } from './components/artwork-list/artwork-list.component'
+import { ArtworkPageComponent } from './pages/artwork-page/artwork-page.component'
 import { ArtworkService } from './services/artwork.service'
 import { ArtworkEffects } from './store/artwork.effects'
 import { artworkReducer } from './store/artwork.reducer'
-import {FormsModule} from "@angular/forms";
 
 export const ARTWORK_FEATURE_NAME = 'artwork'
 
 @NgModule({
-  declarations: [ArtworkListComponent],
+  declarations: [ArtworkPageComponent, ArtworkListComponent],
   providers: [ArtworkService],
   imports: [
     CommonModule,
